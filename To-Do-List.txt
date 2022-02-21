@@ -1,0 +1,14 @@
+HAUPTPROGRAMM
+1) Extremstellen (Maximum, Minimum)
+2) Nullstellen
+DONE! 3) Ableitungsfunktion
+DONE! 4) Ableitungsfunktion der Ableitungsfunktion
+DONE! 5) Symmetrieeigenschaften
+DONE! 6) Verhalten gegen Unendlich
+DONE! 7) Verhalten gegen 0
+
+SUBPROGRAMME
+1) Gleichungs-Löser
+2) Tangentengleichungsbestimmer
+    -inkl. Steigung
+3) Bestimmung der Steigung einer Funktion an einer bestimmten Stelle x0
