@@ -1,4 +1,4 @@
-import lib
+import lib_functions
 
 #Instructions
 print("Beachten:")
@@ -31,7 +31,7 @@ for i in range(0, len(func_bricks)):
 print(func_bricks)
 
 #Run
-print(lib.pos_infinite(func_bricks))
-print(lib.neg_infinite(func_bricks))
-print(lib.derivative(func_bricks))
-print(lib.derivativeOfDerivative(func_bricks))
+print(lib_functions.pos_infinite(func_bricks))
+print(lib_functions.neg_infinite(func_bricks))
+print(lib_functions.derivative(func_bricks))
+print(lib_functions.derivativeOfDerivative(func_bricks))
