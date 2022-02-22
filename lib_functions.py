@@ -2,6 +2,8 @@
 Libary for the function calculation program.
 """
 
+import lib_func_crossX
+from copy import deepcopy
 
 def symmetry(func_values):		#bestimmt das Symmetrieverhalten
 
@@ -55,7 +57,7 @@ def closeTo0(func_values):		#bestimmt das VErhalten nahe 0
 
 def derivative(func_values):
 
-	func_values_2 = func_values
+	func_values_2 = deepcopy(func_values)
 	drvtv = ""
 
 	for i in func_values_2:
@@ -71,13 +73,18 @@ def derivative(func_values):
 	drvtv = drvtv.replace("(", "")
 	drvtv = drvtv.replace(")", "")
 	drvtv = drvtv.replace("+-", "-")
+	drvtv = drvtv.replace("x^0.0", "")
+	drvtv = drvtv.replace("x^1.0", "x")
+
+	if drvtv == "":
+		drvtv = 0
 
 	return "Die Ableitungsfunktion ist   {}".format(drvtv)
 
 
 def derivativeOfDerivative(func_values):
 
-	func_values_2 = func_values
+	func_values_2 = deepcopy(func_values)
 	drvtv = ""
 
 	for i in func_values_2:
@@ -88,20 +95,58 @@ def derivativeOfDerivative(func_values):
 			func_values_2.pop(func_values_2.index(i))
 
 	for j in func_values_2:
-		drvtv = drvtv + " +({})x^{}".format(j[0], j[1])
+		if j[1] >= 1:
+			j[0] = j[0] * j[1]
+			j[1] = j[1] - 1
+		elif j[1] == 0:
+			func_values_2.pop(func_values_2.index(j))
+
+	for k in func_values_2:
+		drvtv = drvtv + " +({})x^{}".format(k[0], k[1])
 
 	drvtv = drvtv.replace("(", "")
 	drvtv = drvtv.replace(")", "")
 	drvtv = drvtv.replace("+-", "-")
+	drvtv = drvtv.replace("x^0.0", "")
+	drvtv = drvtv.replace("x^1.0", "x")
+
+	if drvtv == "":
+		drvtv = 0
 
 	return "Die zweite Ableitungsfunktion ist   {}".format(drvtv)
 
 
+def zero(func_values):
 
+	if func_values[0][1] == 0:
 
+		if func_values[0][0] == 0:
 
+			return "Nullstellen auf gesammter x-Achse"
 
+		else:
 
+			return "Keine Nullstellen"
+
+	elif func_values[0][1] == 1:
+
+		return lib_func_crossX.solveLinear(func_values)
+
+	elif func_values[0][1] == 2:
+
+		ys = lib_func_crossX.solveQuadratic(func_values)
+
+		return "Die Nullstellen liegen bei {} und {}!".format(ys[0], ys[1])
+
+	elif func_values[0][1] == 3:
+
+		ys = lib_func_crossX.solveCubical(func_values)
+
+		return "Die Nullstellen liegen bei: {}".format(ys)
+
+	else:
+
+		return "Yet an error!"
 
 
 
